@@ -1,4 +1,6 @@
-
+# sources:
+#   https://en.wikipedia.org/wiki/Genetic_algorithm
+#   https://machinelearningmastery.com/simple-genetic-algorithm-from-scratch-in-python/
 from numpy.random import randint
 from numpy.random import rand
 
