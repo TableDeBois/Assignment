@@ -35,7 +35,7 @@ def count_attacking_pairs_of_queens(queen_list):
             if (queen_list[x] + y == queen_list[y] + x):
                 diagonal_collisions += 1
 
-    return max_fitness - (horizontal_collisions + diagonal_collisions)
+    return horizontal_collisions + diagonal_collisions
 
 
 # pick 2 random parent and keep the best one
@@ -66,7 +66,7 @@ def mutation(bitstring, r_mut):
 
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     # generate the a random starting population
-    pop = [randint(0, n_queens + 1, n_queens).tolist() for _ in range(n_pop)]
+    pop = [randint(1, n_queens + 1, n_queens).tolist() for _ in range(n_pop)]
 
     best, best_eval = 0, objective(pop[0])
 
