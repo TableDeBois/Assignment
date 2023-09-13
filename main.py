@@ -22,14 +22,14 @@ def chessboard(n):
 # the objective is having the biggest value possible
 def count_attacking_pairs_of_queens(queen_list):
     nq = len(queen_list)
-    max_fitness = (nq*(nq-1))/2
+    max_fitness = (nq * (nq - 1)) / 2
 
-    horizontal_collisions = sum([queen_list.count(queen)-1 for queen in queen_list])/2
+    horizontal_collisions = sum([queen_list.count(queen) - 1 for queen in queen_list]) / 2
 
     diagonal_collisions = 0
     for x in range(len(queen_list)):
         for y in range(len(queen_list)):
-            if (x == y): break # avoid self count
+            if (x == y): break  # avoid self count
             if (queen_list[x] - y == queen_list[y] - x):
                 diagonal_collisions += 1
             if (queen_list[x] + y == queen_list[y] + x):
@@ -91,13 +91,14 @@ def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
         pop = children  # we replace the population with the new children
     return [best, best_eval]
 
+
 # params
+n_queens = 4  # number of queens
 n_iter = 100  # number of iteration
 n_bits = 20  # number of bits inside the bitstrings
 n_pop = 100  # population size
 r_cross = 0.9  # probability of crossover
-r_mut = 1.0 / float(n_bits)  # probability of mutation
-n_queens = 4  # number of queens
+r_mut = 1.0 / float(n_queens)  # probability of mutation
 
 best, score = genetic_algorithm(count_attacking_pairs_of_queens, n_queens, n_iter, n_pop, r_cross, r_mut)
 print('Done!')
