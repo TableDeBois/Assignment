@@ -58,7 +58,7 @@ def crossover(p1, p2, r_cross):
 def mutation(bitstring, r_mut):
     for i in range(len(bitstring)):
         if rand() < r_mut:
-            bitstring[i] = randint(len(bitstring))
+            bitstring[i] = randint(1, len(bitstring) + 1)
 
 
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
