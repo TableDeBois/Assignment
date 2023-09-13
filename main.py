@@ -21,18 +21,15 @@ def chessboard(n):
 
 # the objective is having the biggest value possible
 def count_attacking_pairs_of_queens(queen_list):
-    nq = len(queen_list)
-    max_fitness = (nq * (nq - 1)) / 2
-
-    horizontal_collisions = sum([queen_list.count(queen) - 1 for queen in queen_list]) / 2
+    horizontal_collisions = sum([queen_list.count(queen)-1 for queen in queen_list])/2
 
     diagonal_collisions = 0
     for x in range(len(queen_list)):
         for y in range(len(queen_list)):
-            if (x == y): break  # avoid self count
-            if (queen_list[x] - y == queen_list[y] - x):
+            if x == y: continue # avoid self count
+            if queen_list[x] - y == queen_list[y] - x:
                 diagonal_collisions += 1
-            if (queen_list[x] + y == queen_list[y] + x):
+            if queen_list[x] + y == queen_list[y] + x:
                 diagonal_collisions += 1
 
     return horizontal_collisions + diagonal_collisions
