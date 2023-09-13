@@ -54,11 +54,11 @@ def crossover(p1, p2, r_cross):
     return [c1, c2]
 
 
-# shift some bits randomly accross the bitstring
+# random chance of changing the position of one of the queens
 def mutation(bitstring, r_mut):
     for i in range(len(bitstring)):
         if rand() < r_mut:
-            bitstring[i] = 1 - bitstring[i]
+            bitstring[i] = randint(len(bitstring))
 
 
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
