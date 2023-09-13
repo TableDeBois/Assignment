@@ -90,3 +90,7 @@ def chessboard(n):
             print("|Q|\n")
         else:
             print("| |\n")
+        if(i==n[i]-1):
+            print("|Q|\n")
+        else:
+            print("| |\n")
