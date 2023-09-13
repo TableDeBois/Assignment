@@ -5,6 +5,20 @@ from numpy.random import randint
 from numpy.random import rand
 
 
+def print_sol(sol):
+    print("Solution: {}".format(str(sol)))
+
+
+def chessboard(n):
+    for i in range(len(n)):
+        for j in range(len(n)):
+            if i == (n[j] - 1):
+                print(" Q ", end="")
+            else:
+                print(" . ", end="")
+        print("\n")
+
+
 # the objective is having the biggest value possible
 def onemax(x):
     return -sum(x)
@@ -36,9 +50,9 @@ def mutation(bitstring, r_mut):
             bitstring[i] = 1 - bitstring[i]
 
 
-def genetic_algorithm(objective, n_bits, n_iter, n_pop, r_cross, r_mut):
+def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     # generate the a random starting population
-    pop = [randint(0, 2, n_bits).tolist() for _ in range(n_pop)]
+    pop = [randint(0, n_queens + 1, n_queens).tolist() for _ in range(n_pop)]
 
     best, best_eval = 0, objective(pop[0])
 
@@ -70,8 +84,9 @@ n_bits = 20  # number of bits inside the bitstrings
 n_pop = 100  # population size
 r_cross = 0.9  # probability of crossover
 r_mut = 1.0 / float(n_bits)  # probability of mutation
+n_queens = 4  # number of queens
 
-best, score = genetic_algorithm(onemax, n_bits, n_iter, n_pop, r_cross, r_mut)
+best, score = genetic_algorithm(onemax, n_queens, n_iter, n_pop, r_cross, r_mut)
 print('Done!')
 print('f(%s) = %f' % (best, score))
 
@@ -82,15 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-def chessboard(n):
-    for i in range(len(n)):
-        if (i == n[i] - 1):
-            print("|Q|\n")
-        else:
-            print("| |\n")
-        if(i==n[i]-1):
-            print("|Q|\n")
-        else:
-            print("| |\n")
