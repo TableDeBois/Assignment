@@ -5,28 +5,6 @@ let generationHistory = []
 let queenPositionsHistory = []
 let scoreHistory = []
 
-fetch('/data')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.text()
-  })
-  .then(data => {
-    var lines = data.split('\n');
-    boardSize = lines.shift();
-    console.log(`lines: ${lines}`);
-    lines.forEach(elem => {
-      let array = elem.split('$');
-      generationHistory.push(array[0]);
-      queenPositionsHistory.push(array[1].split(','));
-      scoreHistory.push(array[2]);
-    });
-  })
-  .catch(error => {
-    // Handle any errors that occurred during the request
-    console.warn('Fetch error:', error);
-});
 
 console.log(`queen history: ${queenPositionsHistory}`);
 
@@ -46,28 +24,55 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
+let queens = [];
+let queenTexture = PIXI.Texture.from('../ressources/queen.png');
 
+for (let i = 0; i < 100; i++)
+  queens.push(new PIXI.Sprite(queenTexture))
+
+var graphics = new PIXI.Graphics();
 
 var init = false
 let elapsed = 0.0;
 app.ticker.add((delta) => {
   elapsed += delta;
-  if (!init && queenPositionsHistory.length > 0) {
+    fetch('/data')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text()
+    })
+    .then(data => {
+      var lines = data.split('\n');
+      boardSize = lines.shift();
+      console.log(`lines: ${lines}`);
+      lines.forEach(elem => {
+        let array = elem.split('$');
+        if (array.length < 3) return;
+        generationHistory.push(array[0]);
+        queenPositionsHistory.push(array[1].split(','));
+        scoreHistory.push(array[2]);
+      });
+    })
+    .catch(error => {
+      // Handle any errors that occurred during the request
+      console.warn('Fetch error:', error);
+    });
+  if (queenPositionsHistory.length > 0) {
     let squareSizePixel = BOARD_SIZE_PIXEL / boardSize
-    let queens = [];
-    let queenTexture = PIXI.Texture.from('../ressources/queen.png');
-
-    var graphics = new PIXI.Graphics();
 
     graphics.beginFill('white');
-
     for (let y = 0; y < boardSize; y++)
       for (let x = y % 2 ? 0 : 1; x < boardSize; x += 2)
         graphics.drawRect(x*squareSizePixel, y*squareSizePixel, squareSizePixel, squareSizePixel);
+    graphics.beginFill('black');
+    for (let y = 0; y < boardSize; y++)
+      for (let x = y % 2 ? 1 : 0; x < boardSize; x += 2)
+        graphics.drawRect(x*squareSizePixel, y*squareSizePixel, squareSizePixel, squareSizePixel);
     app.stage.addChild(graphics);
-    for (let i = 0; i < boardSize; i++)
-      queens.push(new PIXI.Sprite(queenTexture))
-    for (let i = 0; i < queens.length; i++) {
+
+    for (let i = 0; i < boardSize; i++) {
       let queen = queens[i];
       queen.width = squareSizePixel*0.9;
       queen.height = squareSizePixel*0.9;
