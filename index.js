@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve('client/index.html'));
 });
 
+app.get('/data', (req, res) => {
+  res.sendFile(path.resolve('output.txt'));
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });

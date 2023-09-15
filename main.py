@@ -1,3 +1,4 @@
+import sys
 # sources:
 #   https://en.wikipedia.org/wiki/Genetic_algorithm
 #   https://machinelearningmastery.com/simple-genetic-algorithm-from-scratch-in-python/
@@ -60,20 +61,20 @@ def mutation(bitstring, r_mut):
         if rand() < r_mut:
             bitstring[i] = randint(1, len(bitstring) + 1)
 
-
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     # generate the a random starting population
     pop = [randint(1, n_queens + 1, n_queens).tolist() for _ in range(n_pop)]
 
     best, best_eval = 0, objective(pop[0])
 
-    for gen in range(n_iter):
+    gen = 0
+    while best_eval != 0:
         scores = [objective(c) for c in pop]  # score of each bitstring
         # keep track of current best score
         for i in range(n_pop):
             if scores[i] < best_eval:
                 best, best_eval = pop[i], scores[i]
-                print(">%d, new best f(%s) = %.3f" % (gen, pop[i], scores[i]))
+                print(f'{gen}${",".join(str(i) for i in pop[i])}${scores[i]}')
 
         # we select the best bitstrings in a tournament like selection
         selected = [selection(pop, scores) for _ in range(n_pop)]
@@ -86,24 +87,24 @@ def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
                 mutation(c, r_mut)  # we create mutation among the child
                 children.append(c)
         pop = children  # we replace the population with the new children
+        gen += 1
     return [best, best_eval]
 
 
+
 # params
-n_queens = 4  # number of queens
+n_queens = int(sys.argv[1]) if sys.argv[1] else 8  # number of queens
 n_iter = 100  # number of iteration
 n_bits = 20  # number of bits inside the bitstrings
 n_pop = 100  # population size
 r_cross = 0.9  # probability of crossover
 r_mut = 1.0 / float(n_queens)  # probability of mutation
 
-best, score = genetic_algorithm(count_attacking_pairs_of_queens, n_queens, n_iter, n_pop, r_cross, r_mut)
-print('Done!')
-print('f(%s) = %f' % (best, score))
-
-
 def main():
-    print("Hello World!")
+    print(n_queens)
+    best, score = genetic_algorithm(count_attacking_pairs_of_queens, n_queens, n_iter, n_pop, r_cross, r_mut)
+    # print('Done!')
+    # print(f'{",".join(str(i) for i in best)}${score}')
 
 
 if __name__ == "__main__":

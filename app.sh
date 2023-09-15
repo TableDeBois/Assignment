@@ -1,4 +1,4 @@
-@bash
+#!/usr/bin/env bash
 
-python3 main.py > output.txt;
-
+rm output.txt
+python -u main.py ${1-4} >> output.txt
