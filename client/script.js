@@ -131,13 +131,33 @@ function updateQueens() {
   }
 }
 
+function clkUpdate(){
+
+  totalSeconds = Math.floor(counter / 1000);
+  minutes = Math.floor(totalSeconds / 60);
+  seconds = (totalSeconds % 60).toString().padStart(2, '0');
+  milliseconds = Math.floor((counter % 1000)).toString().padStart(3, '0')
+}
+
+function clkEnd(){
+  totalSeconds = Math.floor(endCounter / 1000);
+  minutes = Math.floor(totalSeconds / 60);
+  seconds = (totalSeconds % 60).toString().padStart(2, '0');
+  milliseconds = Math.floor((endCounter % 1000)).toString().padStart(3, '0')
+}
+
+let endCounter = 0;
 let counter = 0;
 let minutes = 0;
 let seconds = 0;
 let milliseconds = 0;
 let totalSeconds = 0;
 app.ticker.add((delta) => {
-  counter += app.ticker.deltaMS
+    if(numberOfThreatsValue.text == 0){
+        endCounter=counter;
+    }else{
+        counter += app.ticker.deltaMS
+    }
   console.log(counter)
   fetch('/data')
     .then(response => {
@@ -166,14 +186,13 @@ app.ticker.add((delta) => {
     .catch(error => {
       console.warn('Fetch error:', error);
   });
-  if (queenPositions.length == 0)
+  if (queenPositions.length == 0){
+    clkEnd();
     return
+  }
   updateQueens();
   generationValue.text = gen;
   numberOfThreatsValue.text = Math.floor(threats);
-  totalSeconds = Math.floor(counter / 1000);
-  minutes = Math.floor(totalSeconds / 60);
-  seconds = (totalSeconds % 60).toString().padStart(2, '0');
-  milliseconds = Math.floor((counter % 1000)).toString().padStart(3, '0')
+  clkUpdate();
   timerValue.text = `${minutes}:${seconds}:${milliseconds}`
 });
