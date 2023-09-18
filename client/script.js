@@ -1,3 +1,5 @@
+//Authors :
+//Basile Lamotte & Victor BULTEZ
 const BOARD_SIZE_PIXEL=700;
 var boardSize = 8;
 

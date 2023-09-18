@@ -1,4 +1,6 @@
 import sys
+# Authors:
+# Basile Lamotte & Victor BULTEZ
 # sources:
 #   https://en.wikipedia.org/wiki/Genetic_algorithm
 #   https://machinelearningmastery.com/simple-genetic-algorithm-from-scratch-in-python/
@@ -22,12 +24,12 @@ def chessboard(n):
 
 # the objective is having the biggest value possible
 def count_attacking_pairs_of_queens(queen_list):
-    horizontal_collisions = sum([queen_list.count(queen)-1 for queen in queen_list])/2
+    horizontal_collisions = sum([queen_list.count(queen) - 1 for queen in queen_list]) / 2
 
     diagonal_collisions = 0
     for x in range(len(queen_list)):
         for y in range(len(queen_list)):
-            if x == y: continue # avoid self count
+            if x == y: continue  # avoid self count
             if queen_list[x] - y == queen_list[y] - x:
                 diagonal_collisions += 1
             if queen_list[x] + y == queen_list[y] + x:
@@ -61,12 +63,14 @@ def mutation(bitstring, r_mut):
         if rand() < r_mut:
             bitstring[i] = randint(1, len(bitstring) + 1)
 
+
 def print_best_of_gen(pop, scores, gen):
     best_gen, best_gen_eval = [], float('inf')
     for i in range(n_pop):
         if scores[i] < best_gen_eval:
             best_gen, best_gen_eval = pop[i], scores[i]
     print(f'{gen}${",".join(str(i) for i in best_gen)}${best_gen_eval}')
+
 
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     # generate the a random starting population
@@ -100,7 +104,6 @@ def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     return [best, best_eval]
 
 
-
 # params
 n_queens = int(sys.argv[1]) if sys.argv[1] else 8  # number of queens
 n_iter = 100  # number of iteration
@@ -108,6 +111,7 @@ n_bits = 20  # number of bits inside the bitstrings
 n_pop = 100  # population size
 r_cross = 0.9  # probability of crossover
 r_mut = 1.0 / float(n_queens)  # probability of mutation
+
 
 def main():
     print(n_queens)

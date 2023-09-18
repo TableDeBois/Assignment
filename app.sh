@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+#Authors :
+#Basile Lamotte & Victor BULTEZ
 node index.js &
 case "$OSTYPE" in
 linux*) xdg-open http://localhost:3000 ;;
