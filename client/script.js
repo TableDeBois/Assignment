@@ -11,7 +11,7 @@ let squareSizePixel = BOARD_SIZE_PIXEL / boardSize
 
 let app = new PIXI.Application({
   width: BOARD_SIZE_PIXEL+300,
-  height: BOARD_SIZE_PIXEL,
+  height: BOARD_SIZE_PIXEL+100,
   backgroundColor: 0xEEEEEE,
 });
 document.body.appendChild(app.view);
@@ -33,6 +33,20 @@ generation.x = 715;
 generation.y = 20;
 app.stage.addChild(generation);
 
+const timerValue = new PIXI.Text('00:00:00', {
+    "dropShadow": true,
+    "dropShadowAlpha": 20,
+    "dropShadowAngle": 0.6,
+    "dropShadowDistance": 13,
+    "fill": "#f9f06b",
+    "fontSize": 90,
+    "fontWeight": "bold",
+    "strokeThickness": 5
+});
+timerValue.anchor.set(0.5);
+timerValue.x = 400;
+timerValue.y = 750;
+app.stage.addChild(timerValue);
 
 const generationValue = new PIXI.Text('0', {
     "dropShadow": true,
@@ -114,7 +128,13 @@ function updateQueens() {
   }
 }
 
+let counter = 0
+let minutes = 0
+let seconds = 0
+let milliseconds = 0
 app.ticker.add((delta) => {
+  counter += app.ticker.deltaMS
+  console.log(counter)
   fetch('/data')
     .then(response => {
       if (!response.ok) {
@@ -147,4 +167,8 @@ app.ticker.add((delta) => {
   updateQueens();
   generationValue.text = gen;
   numberOfThreatsValue.text = Math.floor(threats);
+  minutes = counter%1000000
+  seconds = counter%1000 - minutes
+  milliseconds = counter - minutes - seconds
+  timerValue.text = `${minutes}:${seconds}:${milliseconds}`
 });
