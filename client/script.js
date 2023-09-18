@@ -25,6 +25,15 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
+
+var whiteCorner = new PIXI.Graphics();
+
+whiteCorner.beginFill('white');
+
+whiteCorner.drawRect(700, 700, 300, 100);
+
+app.stage.addChild(whiteCorner);
+
 const generation = new PIXI.Text('Generation:', {
   "fontSize": 30,
   "fontWeight": "bold"
@@ -32,6 +41,15 @@ const generation = new PIXI.Text('Generation:', {
 generation.x = 715;
 generation.y = 20;
 app.stage.addChild(generation);
+
+const title = new PIXI.Text('N-Queens problem solved with Evolutionary\noptimization.\n\nMade by Basile and Victor.', {
+  "fontSize": 12,
+  "fontWeight": "bold"
+});
+
+title.x = 715;
+title.y = 720;
+app.stage.addChild(title);
 
 const timerValue = new PIXI.Text('00:00:00', {
   "dropShadow": true,
@@ -45,7 +63,7 @@ const timerValue = new PIXI.Text('00:00:00', {
   "fontFamily": "Courier New"
 });
 timerValue.anchor.set(0.5);
-timerValue.x = 400;
+timerValue.x = 350;
 timerValue.y = 750;
 app.stage.addChild(timerValue);
 
