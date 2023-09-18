@@ -60,7 +60,7 @@ const timerValue = new PIXI.Text('00:00:00', {
   "fontSize": 90,
   "fontWeight": "bold",
   "strokeThickness": 5,
-  "fontFamily": "Courier New"
+  "fontFamily": "system-ui"
 });
 timerValue.anchor.set(0.5);
 timerValue.x = 350;
@@ -76,7 +76,7 @@ const generationValue = new PIXI.Text('0', {
   "fontSize": 90,
   "fontWeight": "bold",
   "strokeThickness": 5,
-  "fontFamily": "Courier New"
+  "fontFamily": "system-ui"
 });
 generationValue.anchor.set(0.5);
 generationValue.x = 840;
@@ -100,7 +100,7 @@ const numberOfThreatsValue = new PIXI.Text('0', {
     "fontSize": 150,
     "fontWeight": "bold",
     "strokeThickness": 5,
-    "fontFamily": "Courier New"
+    "fontFamily": "system-ui"
 });
 numberOfThreatsValue.anchor.set(0.5);
 numberOfThreatsValue.x = 840;
