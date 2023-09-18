@@ -34,14 +34,15 @@ generation.y = 20;
 app.stage.addChild(generation);
 
 const timerValue = new PIXI.Text('00:00:00', {
-    "dropShadow": true,
-    "dropShadowAlpha": 20,
-    "dropShadowAngle": 0.6,
-    "dropShadowDistance": 13,
-    "fill": "#f9f06b",
-    "fontSize": 90,
-    "fontWeight": "bold",
-    "strokeThickness": 5
+  "dropShadow": true,
+  "dropShadowAlpha": 20,
+  "dropShadowAngle": 0.6,
+  "dropShadowDistance": 13,
+  "fill": "#f9f06b",
+  "fontSize": 90,
+  "fontWeight": "bold",
+  "strokeThickness": 5,
+  "fontFamily": "Courier New"
 });
 timerValue.anchor.set(0.5);
 timerValue.x = 400;
@@ -49,14 +50,15 @@ timerValue.y = 750;
 app.stage.addChild(timerValue);
 
 const generationValue = new PIXI.Text('0', {
-    "dropShadow": true,
-    "dropShadowAlpha": 20,
-    "dropShadowAngle": 0.6,
-    "dropShadowDistance": 13,
-    "fill": "#f9f06b",
-    "fontSize": 90,
-    "fontWeight": "bold",
-    "strokeThickness": 5
+  "dropShadow": true,
+  "dropShadowAlpha": 20,
+  "dropShadowAngle": 0.6,
+  "dropShadowDistance": 13,
+  "fill": "#f9f06b",
+  "fontSize": 90,
+  "fontWeight": "bold",
+  "strokeThickness": 5,
+  "fontFamily": "Courier New"
 });
 generationValue.anchor.set(0.5);
 generationValue.x = 840;
@@ -79,7 +81,8 @@ const numberOfThreatsValue = new PIXI.Text('0', {
     "fill": "#f9f06b",
     "fontSize": 150,
     "fontWeight": "bold",
-    "strokeThickness": 5
+    "strokeThickness": 5,
+    "fontFamily": "Courier New"
 });
 numberOfThreatsValue.anchor.set(0.5);
 numberOfThreatsValue.x = 840;
