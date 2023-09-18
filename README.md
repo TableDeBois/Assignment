@@ -3,13 +3,18 @@
 To install dependencies:
 
 ```bash
-bun install
+npm i
+```
+or
+```bash
+npm install
 ```
 
 To run:
-
+Start the bash script file with the number of queens in parameter
 ```bash
-bun run index.js
+./app.sh [n]
 ```
 
-This project was created using `bun init` in bun v1.0.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This will start a visual interface on your prefered browser. 
+Have fun watching the problem be solved !
