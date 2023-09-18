@@ -61,6 +61,13 @@ def mutation(bitstring, r_mut):
         if rand() < r_mut:
             bitstring[i] = randint(1, len(bitstring) + 1)
 
+def print_best_of_gen(pop, scores, gen):
+    best_gen, best_gen_eval = [], float('inf')
+    for i in range(n_pop):
+        if scores[i] < best_gen_eval:
+            best_gen, best_gen_eval = pop[i], scores[i]
+    print(f'{gen}${",".join(str(i) for i in best_gen)}${best_gen_eval}')
+
 def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     # generate the a random starting population
     pop = [randint(1, n_queens + 1, n_queens).tolist() for _ in range(n_pop)]
@@ -71,6 +78,8 @@ def genetic_algorithm(objective, n_queens, n_iter, n_pop, r_cross, r_mut):
     while best_eval != 0:
         scores = [objective(c) for c in pop]  # score of each bitstring
         # keep track of current best score
+        print_best_of_gen(pop, scores, gen)
+
         for i in range(n_pop):
             if scores[i] < best_eval:
                 best, best_eval = pop[i], scores[i]

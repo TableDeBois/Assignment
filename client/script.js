@@ -88,6 +88,7 @@ function drawBoard() {
 }
 
 function drawQueens() {
+  queens = []
   for (let i = 0; i < boardSize; i++) {
     let queen = new PIXI.Sprite(queenTexture);
     queen.anchor.x = 0.5;
@@ -97,6 +98,7 @@ function drawQueens() {
     app.stage.addChild(queen);
     queens.push(queen)
   }
+  console.log(queens.length);
 }
 
 function updateQueens() {
